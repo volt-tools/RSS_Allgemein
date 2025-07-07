@@ -15,6 +15,8 @@ fg.title("SH RSS – Erstversuch")
 fg.link(href="https://robi1928.github.io/sh_rss/shrss.xml", rel="self")
 fg.description("Alles was ich wissen will")
 fg.language("de")
+from email.utils import format_datetime
+fg.lastBuildDate(format_datetime(datetime.now()))
 
 entries = []
 for feed in feed_config["feeds"]:
