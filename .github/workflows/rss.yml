@@ -1,0 +1,33 @@
+workflow_content = """name: Generate RSS Feed
+
+on:
+  schedule:
+    - cron: '0 5 * * *'  # 07:00 MESZ / 06:00 MEZ / 05:00 UTC
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate RSS Feed
+        run: python generate_feed.py
+
+      - name: Commit and push feed
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add output/voltsh.xml
+          git commit -m "Update RSS feed"
+          git push
+"""
