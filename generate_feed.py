@@ -2,6 +2,7 @@ import feedparser
 from feedgen.feed import FeedGenerator
 import yaml
 from datetime import datetime
+from datetime import timezone
 from dateutil import parser as date_parser
 from email.utils import format_datetime
 
@@ -25,7 +26,12 @@ for feed in feed_config["feeds"]:
         if any(keyword.lower() in entry.title.lower() or keyword.lower() in entry.get("description", "").lower() for keyword in keywords):
             entries.append(entry)
 
-entries.sort(key=lambda x: date_parser.parse(x.get("published", datetime.now().isoformat())), reverse=True)
+entries.sort(
+    key=lambda x: date_parser.parse(
+        x.get("published", datetime.now(timezone.utc).isoformat())
+    ),
+    reverse=True
+)
 
 for entry in entries[:50]:
     fe = fg.add_entry()
