@@ -22,8 +22,9 @@ entries = []
 for feed in feed_config["feeds"]:
     d = feedparser.parse(feed["url"])
     for entry in d.entries:
-        if any(keyword.lower() in entry.title.lower() or keyword.lower() in entry.get("description", "").lower() for keyword in keywords):
-            entries.append(entry)
+ #       if any(keyword.lower() in entry.title.lower() or keyword.lower() in entry.get("description", "").lower() for keyword in keywords):
+ #           entries.append(entry)
+entries.append(entry)
 
 entries.sort(key=lambda x: date_parser.parse(x.get("published", datetime.now().isoformat())), reverse=True)
 
