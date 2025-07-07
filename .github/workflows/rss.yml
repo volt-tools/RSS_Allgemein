@@ -3,7 +3,7 @@ workflow_text = """name: Generate RSS Feed
 on:
   schedule:
     - cron: '0 5 * * *'
-    - cron: '33 17 * * *'
+    - cron: '0 18 * * *'
   workflow_dispatch:
 
 jobs:
