@@ -3,6 +3,7 @@ from feedgen.feed import FeedGenerator
 import yaml
 from datetime import datetime
 from dateutil import parser as date_parser
+from email.utils import format_datetime
 
 with open("feeds.yaml") as f:
     feed_config = yaml.safe_load(f)
@@ -15,7 +16,6 @@ fg.title("SH RSS – Erstversuch")
 fg.link(href="https://robi1928.github.io/sh_rss/shrss.xml", rel="self")
 fg.description("Alles was ich wissen will")
 fg.language("de")
-from email.utils import format_datetime
 fg.lastBuildDate(format_datetime(datetime.now()))
 
 entries = []
@@ -25,10 +25,8 @@ for feed in feed_config["feeds"]:
         if any(keyword.lower() in entry.title.lower() or keyword.lower() in entry.get("description", "").lower() for keyword in keywords):
             entries.append(entry)
 
-# Nach Datum sortieren
 entries.sort(key=lambda x: date_parser.parse(x.get("published", datetime.now().isoformat())), reverse=True)
 
-# Artikel zum Feed hinzufügen
 for entry in entries[:50]:
     fe = fg.add_entry()
     fe.title(entry.title)
@@ -37,5 +35,4 @@ for entry in entries[:50]:
     fe.pubDate(entry.get("published", datetime.now().isoformat()))
     fe.guid(entry.link)
 
-# Feed speichern
 fg.rss_file("output/shrss.xml")
