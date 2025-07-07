@@ -30,7 +30,11 @@ for feed in feed_config["feeds"]:
 
 def parse_date_safe(entry):
     try:
-        dt = date_parser.parse(entry.get("published", ""))
+        if "published_parsed" in entry and entry["published_parsed"]:
+            return datetime(*entry.published_parsed[:6], tzinfo=timezone.utc)
+
+        date_str = entry.get("published") or entry.get("updated") or ""
+        dt = date_parser.parse(date_str)
         if dt.tzinfo is None:
             dt = dt.replace(tzinfo=timezone.utc)
         return dt
