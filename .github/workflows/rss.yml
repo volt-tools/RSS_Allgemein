@@ -32,5 +32,4 @@ jobs:
           git config user.email "github-actions@github.com"
           git add docs/shrss.xml
           git commit -m 'Update RSS feed' || echo "Nothing to commit"
-          git push
-"""
+          git push"""
