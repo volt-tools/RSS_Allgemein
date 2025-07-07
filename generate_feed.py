@@ -1,8 +1,7 @@
 import feedparser
 from feedgen.feed import FeedGenerator
 import yaml
-from datetime import datetime
-from datetime import timezone
+from datetime import datetime, timezone
 from dateutil import parser as date_parser
 from email.utils import format_datetime
 
@@ -13,32 +12,41 @@ with open("keywords.yaml") as f:
     keywords = yaml.safe_load(f)["keywords"]
 
 fg = FeedGenerator()
-fg.title("SH RSS – Erstversuch")
+fg.title("Volt SH – Aggregierter Nachrichtenfeed")
 fg.link(href="https://robi1928.github.io/sh_rss/shrss.xml", rel="self")
-fg.description("Alles was ich wissen will")
+fg.description("Relevante Artikel für Volt Schleswig-Holstein")
 fg.language("de")
-fg.lastBuildDate(format_datetime(datetime.now()))
+fg.lastBuildDate(format_datetime(datetime.now(timezone.utc)))
 
 entries = []
 for feed in feed_config["feeds"]:
     d = feedparser.parse(feed["url"])
     for entry in d.entries:
-        if any(keyword.lower() in entry.title.lower() or keyword.lower() in entry.get("description", "").lower() for keyword in keywords):
+        title = entry.get("title", "")
+        description = entry.get("description", "")
+
+        if any(keyword.lower() in title.lower() or keyword.lower() in description.lower() for keyword in keywords):
             entries.append(entry)
 
-entries.sort(
-    key=lambda x: date_parser.parse(
-        x.get("published", datetime.now(timezone.utc).isoformat())
-    ),
-    reverse=True
-)
+def parse_date_safe(entry):
+    try:
+        dt = date_parser.parse(entry.get("published", ""))
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt
+    except Exception:
+        return datetime.now(timezone.utc)
+
+entries.sort(key=parse_date_safe, reverse=True)
 
 for entry in entries[:50]:
     fe = fg.add_entry()
-    fe.title(entry.title)
-    fe.link(href=entry.link)
+    fe.title(entry.get("title", "Kein Titel"))
+    fe.link(href=entry.get("link", "#"))
     fe.description(entry.get("description", ""))
-    fe.pubDate(entry.get("published", datetime.now().isoformat()))
-    fe.guid(entry.link)
+    fe.guid(entry.get("link", "#"))
 
-fg.rss_file("output/shrss.xml")
+    pub_date = parse_date_safe(entry)
+    fe.pubDate(pub_date)
+
+fg.rss_file("docs/shrss.xml")
