@@ -13,9 +13,9 @@ with open("keywords.yaml") as f:
 
 # Feed-Generator vorbereiten
 fg = FeedGenerator()
-fg.title("Volt SH – Aggregierter Nachrichtenfeed")
+fg.title("SH – Aggregierter Nachrichtenfeed")
 fg.link(href="https://<dein-github-name>.github.io/voltsh_rss_feed/output/voltsh.xml", rel="self")
-fg.description("Relevante Artikel für Volt Schleswig-Holstein")
+fg.description("Relevante Artikel für Schleswig-Holstein")
 fg.language("de")
 
 # Feeds einlesen
@@ -39,4 +39,4 @@ for entry in entries[:50]:
     fe.guid(entry.link)
 
 # Feed speichern
-fg.rss_file("output/voltsh.xml")
+fg.rss_file("output/shrss.xml")
