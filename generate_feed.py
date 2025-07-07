@@ -4,21 +4,18 @@ import yaml
 from datetime import datetime
 from dateutil import parser as date_parser
 
-# Laden der Feeds und Stichwörter
 with open("feeds.yaml") as f:
     feed_config = yaml.safe_load(f)
 
 with open("keywords.yaml") as f:
     keywords = yaml.safe_load(f)["keywords"]
 
-# Feed-Generator vorbereiten
 fg = FeedGenerator()
-fg.title("SH – Aggregierter Nachrichtenfeed")
-fg.link(href="https://<dein-github-name>.github.io/voltsh_rss_feed/output/voltsh.xml", rel="self")
-fg.description("Relevante Artikel für Schleswig-Holstein")
+fg.title("SH RSS – Erstversuch")
+fg.link(href="https://robi1928.github.io/sh_rss/shrss.xml", rel="self")
+fg.description("Alles was ich wissen will")
 fg.language("de")
 
-# Feeds einlesen
 entries = []
 for feed in feed_config["feeds"]:
     d = feedparser.parse(feed["url"])
