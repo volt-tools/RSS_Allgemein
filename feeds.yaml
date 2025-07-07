@@ -1,5 +1,9 @@
 feeds:
-  - url: https://www.kn-online.de/rss
-  - url: https://www.shz.de/rss
-  - url: https://www.landtag.ltsh.de/export/rss.xml
-  - url: https://www.ndr.de/nachrichten/schleswig-holstein/rss
+  - url: https://www.kn-online.de/arc/outboundfeeds/rss/category/lokales/kiel/
+  - url: https://www.kn-online.de/arc/outboundfeeds/rss/category/politik/
+  - url: https://www.kn-online.de/arc/outboundfeeds/rss/category/wirtschaft/
+  - url: https://www.kn-online.de/arc/outboundfeeds/rss/category/der-norden/
+  - url: https://www.kn-online.de/arc/outboundfeeds/rss/category/schleswig-holstein/
+  - url: https://www.schleswig-holstein.de/DE/landesportal/service/RSS/RSS_PI_alle/RSSNewsfeed_PI_alle.xml
+  - url: https://www.ltsh.de/presseticker/pt.xml
+  - url: http://www.ndr.de/nachrichten/schleswig-holstein/index-rss.xml
