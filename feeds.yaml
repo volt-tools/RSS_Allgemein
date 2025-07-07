@@ -1,0 +1,5 @@
+feeds:
+  - url: https://www.kn-online.de/rss
+  - url: https://www.shz.de/rss
+  - url: https://www.landtag.ltsh.de/export/rss.xml
+  - url: https://www.ndr.de/nachrichten/schleswig-holstein/rss
