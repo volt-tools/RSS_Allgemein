@@ -3,7 +3,7 @@ workflow_content = """name: Generate RSS Feed
 on:
   schedule:
     - cron: '0 5 * * *'
-    - cron: '20 17 * * *'
+    - cron: '14 17 * * *'
   workflow_dispatch:
 
 jobs:
@@ -19,16 +19,18 @@ jobs:
           python-version: '3.x'
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          pip install -r requirements.txt
 
       - name: Generate RSS Feed
-        run: python generate_feed.py
+        run: |
+          python generate_feed.py
 
       - name: Commit and push feed
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git add docs/shrss.xml
-          git commit -m "Update RSS feed"
+          git commit -m "Update RSS feed" || echo "Nothing to commit"
           git push
 """
