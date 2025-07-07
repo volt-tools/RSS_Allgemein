@@ -12,9 +12,9 @@ with open("keywords.yaml") as f:
     keywords = yaml.safe_load(f)["keywords"]
 
 fg = FeedGenerator()
-fg.title("Volt SH – Aggregierter Nachrichtenfeed")
+fg.title("SH – Aggregierter Nachrichtenfeed")
 fg.link(href="https://robi1928.github.io/sh_rss/shrss.xml", rel="self")
-fg.description("Relevante Artikel für Volt Schleswig-Holstein")
+fg.description("Relevante Artikel für Schleswig-Holstein")
 fg.language("de")
 fg.lastBuildDate(format_datetime(datetime.now(timezone.utc)))
 
