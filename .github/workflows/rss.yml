@@ -3,7 +3,7 @@ name: Generate RSS Feed
 on:
   schedule:
     - cron: '0 5 * * *'
-    - cron: '17 18 * * *'
+    - cron: '21 18 * * *'
   workflow_dispatch:
 
 jobs:
