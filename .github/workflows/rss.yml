@@ -1,0 +1,36 @@
+workflow_text = """name: Generate RSS Feed
+
+on:
+  schedule:
+    - cron: '0 5 * * *'      # 07:00 Uhr MESZ
+    - cron: '14 17 * * *'    # 19:14 Uhr MESZ
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Generate RSS Feed
+        run: |
+          python generate_feed.py
+
+      - name: Commit and push feed
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add docs/shrss.xml
+          git commit -m 'Update RSS feed' || echo "Nothing to commit"
+          git push
+"""
