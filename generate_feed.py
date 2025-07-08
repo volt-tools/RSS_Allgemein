@@ -43,7 +43,7 @@ def parse_date_safe(entry):
 
 entries.sort(key=parse_date_safe, reverse=True)
 
-for entry in entries[:50]:
+for entry in entries[:200]:
     fe = fg.add_entry()
     fe.title(entry.get("title", "Kein Titel"))
     fe.link(href=entry.get("link", "#"))
