@@ -9,6 +9,6 @@ feeds:
   - url: https://www.schleswig-holstein.de/DE/landesportal/service/RSS/RSS_zuwanderungsbericht/RSSNewsfeed_zuwanderungsbericht_xml.xml?nn=35e3178b-07c7-4992-b5d6-3700882f488f
   - url: https://www.schleswig-holstein.de/DE/landesportal/service/RSS/RSS_GVOBlatt_IV/RSSNewsfeed_GVOBlatt_IV.xml?nn=35e3178b-07c7-4992-b5d6-3700882f488f
   - url: https://www.europa-union-sh.de/rss/all
-  - url: https://schleswig-holstein.nabu.de/rssfeed.php
+#  - url: https://schleswig-holstein.nabu.de/rssfeed.php
   - url: http://www.ndr.de/nachrichten/schleswig-holstein/index-rss.xml
   - url: https://www.thw.de/SiteGlobals/Functions/RSS/LV/HHMVSH/DE/RSSNewsfeed_Pressemitteilungen.xml?nn=50314
