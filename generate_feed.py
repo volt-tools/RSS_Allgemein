@@ -13,7 +13,7 @@ with open("keywords.yaml") as f:
 
 fg = FeedGenerator()
 fg.title("SH – Aggregierter Nachrichtenfeed")
-fg.link(href="https://robi1928.github.io/sh_rss/shrss.xml", rel="self")
+fg.link(href="https://volt-tools.github.io/RSS_Allgemein/", rel="self")
 fg.description("Relevante Artikel für Schleswig-Holstein")
 fg.language("de")
 fg.lastBuildDate(format_datetime(datetime.now(timezone.utc)))
