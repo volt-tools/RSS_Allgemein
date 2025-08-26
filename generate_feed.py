@@ -1,3 +1,4 @@
+import os
 import feedparser
 from feedgen.feed import FeedGenerator
 import yaml
@@ -46,12 +47,14 @@ for feed in feed_config["feeds"]:
 
 entries.sort(key=parse_date_safe, reverse=True)
 
+
 for entry in entries[:200]:
     fe = fg.add_entry()
     fe.title(entry.get("title", "Kein Titel"))
     fe.link(href=entry.get("link", "#"))
     fe.description(entry.get("description", ""))
-    fe.guid(entry.get("link", "#"))
+    fe.guid(entry.get("id") or entry.get("link", "#"), permalink=False)
     fe.pubDate(parse_date_safe(entry))
 
+os.makedirs("docs", exist_ok=True)
 fg.rss_file("docs/shrss.xml")
